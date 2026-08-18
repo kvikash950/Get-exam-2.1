@@ -1,0 +1,120 @@
+
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+    
+    function isAdmin() {
+      return isSignedIn() && (
+        exists(/databases/$(database)/documents/admin_roles/$(request.auth.uid)) || 
+        request.auth.token.email.lower() == 'kvikash@gmail.com'
+      );
+    }
+    
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+
+    // Platform Config - Publicly readable for Maintenance checks
+    match /platformConfig/{id} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Activity Logs - Admins only
+    match /activity_logs/{logId} {
+      allow read: if isAdmin();
+      allow write: if isSignedIn();
+    }
+
+    // Doubts
+    match /doubts/{doubtId} {
+      allow list, get: if isSignedIn();
+      allow create: if isSignedIn();
+      allow update: if isSignedIn();
+      allow delete: if isAdmin();
+    }
+
+    // Coupons
+    match /coupons/{couponId} {
+      allow read: if isSignedIn();
+      allow write: if isAdmin();
+    }
+
+    // Exam Attempts - Critical Security
+    match /exam_attempts/{attemptId} {
+      // Students can read their own attempt, centers can read all their own center attempts
+      allow get: if isSignedIn();
+      allow list: if isSignedIn();
+      
+      // Students can only CREATE their own attempt and update their own progress
+      allow create: if isSignedIn();
+      allow update: if isSignedIn() && (
+        // Only allow updating status, answers, and violation logs
+        request.resource.data.diff(resource.data).affectedKeys()
+          .hasOnly(['status', 'submissionReason', 'submittedAt', 'score', 'maxScore', 'percentageScore', 'totalQuestionsAttempted', 'correctAnswersCount', 'wrongAnswersCount', 'sectionAnalytics', 'securityViolationsCount', 'lastSeen', 'updatedAt', 'latestSnapshot', 'proctoringStatus', 'securityReport'])
+      );
+      
+      allow delete: if isAdmin();
+      
+      match /student_answers/{ansId} {
+        allow list, get: if isSignedIn();
+        allow create, update, delete: if isSignedIn();
+      }
+    }
+
+    // Profiles
+    match /users/{userId} {
+      allow read: if isSignedIn();
+      allow write: if isOwner(userId) || isAdmin();
+    }
+
+    // Coaching Centers
+    match /coaching_centers/{centerId} {
+      allow read: if isSignedIn();
+      allow write: if isOwner(centerId) || isAdmin();
+      
+      match /student_enrollments/{enrollmentId} {
+        allow read: if isSignedIn();
+        allow write: if isOwner(centerId) || isAdmin();
+      }
+    }
+
+    // Exams & Questions - Students can only READ
+    match /exams/{examId} {
+      allow read: if isSignedIn();
+      allow create: if isSignedIn() && isOwner(request.resource.data.coachingCenterId);
+      allow update: if isSignedIn() && isOwner(resource.data.coachingCenterId);
+      allow delete: if isAdmin();
+      
+      match /questions/{qId} {
+        allow read: if isSignedIn();
+        allow write: if isSignedIn();
+      }
+    }
+    
+    // Config & Admin
+    match /pages/{pageId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    
+    match /subscriptionPlans/{planId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+    
+    match /broadcasts/{id} {
+      allow read: if true;
+      allow write: if isSignedIn();
+    }
+    
+    match /admin_roles/{id} {
+      allow read: if isSignedIn();
+      allow write: if isAdmin();
+    }
+  }
+}

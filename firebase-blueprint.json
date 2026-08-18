@@ -1,0 +1,116 @@
+
+{
+  "entities": {
+    "User": {
+      "$schema": "http://json-schema.org/draft-07/schema#",
+      "title": "User",
+      "type": "object",
+      "description": "Represents a user, including Admins, Center Owners, Teachers, and Students.",
+      "properties": {
+        "id": { "type": "string" },
+        "name": { "type": "string" },
+        "email": { "type": "string", "format": "email" },
+        "role": { "type": "string", "enum": ["Admin", "CoachingCenter", "Teacher", "Student"] },
+        "assignedBatches": { "type": "array", "items": { "type": "string" }, "description": "For Teachers: Batches they can manage." },
+        "coachingCenterId": { "type": "string", "description": "ID of the parent institute." },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["id", "name", "email", "role", "createdAt"]
+    },
+    "Exam": {
+      "title": "Exam",
+      "type": "object",
+      "description": "An assessment created by a coaching center or admin.",
+      "properties": {
+        "id": { "type": "string" },
+        "title": { "type": "string" },
+        "subject": { "type": "string" },
+        "category": { "type": "string", "description": "Exam category like SSC, Banking, UPSC, etc." },
+        "description": { "type": "string" },
+        "coachingCenterId": { "type": "string" },
+        "startTime": { "type": "string", "format": "date-time" },
+        "endTime": { "type": "string", "format": "date-time" },
+        "studentCapacity": { "type": "number" },
+        "totalQuestions": { "type": "number" },
+        "status": { "type": "string", "enum": ["Active", "Draft", "Completed"] },
+        "isAdminExam": { "type": "boolean", "description": "True if conducted by platform admin." },
+        "isPaid": { "type": "boolean" },
+        "price": { "type": "number" },
+        "posterUrl": { "type": "string" }
+      },
+      "required": ["title", "subject", "coachingCenterId", "startTime", "endTime"]
+    },
+    "Doubt": {
+      "title": "Doubt",
+      "type": "object",
+      "description": "A doubt raised by a student during an exam.",
+      "properties": {
+        "id": { "type": "string" },
+        "examId": { "type": "string" },
+        "questionId": { "type": "string" },
+        "studentUserId": { "type": "string" },
+        "studentName": { "type": "string" },
+        "studentRollNumber": { "type": "string" },
+        "batchName": { "type": "string" },
+        "message": { "type": "string" },
+        "status": { "type": "string", "enum": ["Pending", "Resolved"] },
+        "coachingCenterId": { "type": "string" },
+        "createdAt": { "type": "string", "format": "date-time" }
+      },
+      "required": ["examId", "questionId", "studentUserId", "message", "coachingCenterId"]
+    },
+    "ActivityLog": {
+      "title": "ActivityLog",
+      "type": "object",
+      "description": "Tracks institutional actions for administrative audit.",
+      "properties": {
+        "id": { "type": "string" },
+        "centerId": { "type": "string" },
+        "centerName": { "type": "string" },
+        "action": { "type": "string" },
+        "details": { "type": "string" },
+        "timestamp": { "type": "string", "format": "date-time" }
+      },
+      "required": ["centerId", "action", "timestamp"]
+    }
+  },
+  "auth": {
+    "providers": ["password", "anonymous"]
+  },
+  "firestore": {
+    "structure": [
+      {
+        "path": "/exams/{examId}",
+        "definition": {
+          "entityName": "Exam",
+          "schema": { "$ref": "#/backend/entities/Exam" },
+          "description": "Examination papers created by centers or admin."
+        }
+      },
+      {
+        "path": "/doubts/{doubtId}",
+        "definition": {
+          "entityName": "Doubt",
+          "schema": { "$ref": "#/backend/entities/Doubt" },
+          "description": "Doubts raised by students during tests."
+        }
+      },
+      {
+        "path": "/users/{userId}",
+        "definition": {
+          "entityName": "User",
+          "schema": { "$ref": "#/backend/entities/User" },
+          "description": "Profiles for all users."
+        }
+      },
+      {
+        "path": "/activity_logs/{logId}",
+        "definition": {
+          "entityName": "ActivityLog",
+          "schema": { "$ref": "#/backend/entities/ActivityLog" },
+          "description": "System-wide activity logs."
+        }
+      }
+    ]
+  }
+}

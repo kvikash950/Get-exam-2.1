@@ -1,0 +1,59 @@
+
+{
+  "placeholderImages": [
+    {
+      "id": "hero-diverse-students",
+      "description": "Diverse group of students using tablets and laptops for digital learning",
+      "imageUrl": "https://picsum.photos/seed/edutech-hero/1200/800",
+      "imageHint": "students tablets"
+    },
+    {
+      "id": "omr-sheet",
+      "description": "High-definition image of an exam OMR sheet",
+      "imageUrl": "https://picsum.photos/seed/omr-sheet/600/400",
+      "imageHint": "exam sheet"
+    },
+    {
+      "id": "digital-clock",
+      "description": "Modern digital clock representing time-bound practice",
+      "imageUrl": "https://picsum.photos/seed/digital-clock/600/400",
+      "imageHint": "digital clock"
+    },
+    {
+      "id": "exam-interface-preview",
+      "description": "Clean and modern online examination interface",
+      "imageUrl": "https://picsum.photos/seed/exam-ui/1000/700",
+      "imageHint": "software interface"
+    },
+    {
+      "id": "student-test-focus",
+      "description": "Focused student taking a digital mock test on a laptop",
+      "imageUrl": "https://picsum.photos/seed/student-test/800/800",
+      "imageHint": "student exam"
+    },
+    {
+      "id": "exam-result-celebration",
+      "description": "Happy student receiving their digital merit certificate",
+      "imageUrl": "https://picsum.photos/seed/student-success/800/800",
+      "imageHint": "student success"
+    },
+    {
+      "id": "educator-testimonial",
+      "description": "Professional educator smiling in a classroom",
+      "imageUrl": "https://picsum.photos/seed/educator/200/200",
+      "imageHint": "teacher smile"
+    },
+    {
+      "id": "student-testimonial",
+      "description": "Happy student celebrating success",
+      "imageUrl": "https://picsum.photos/seed/happy-student/200/200",
+      "imageHint": "student success"
+    },
+    {
+      "id": "multi-device-showcase",
+      "description": "Exam interface displayed on laptop, tablet and smartphone",
+      "imageUrl": "https://picsum.photos/seed/devices/1200/600",
+      "imageHint": "responsive devices"
+    }
+  ]
+}
