@@ -36,7 +36,7 @@ export default function LoginPage() {
   const configRef = useMemoFirebase(() => db ? doc(db, 'platformConfig', 'settings') : null, [db]);
   const { data: config } = useDoc(configRef);
   const platformLogoUrl = config?.platformLogoUrl || null;
-  const siteName = config?.siteName || "My Exam";
+  const siteName = config?.siteName || "Get Exam";
 
   const checkRedirect = useCallback(async (currentUser: any) => {
     if (!db || !currentUser) return;
@@ -148,9 +148,6 @@ export default function LoginPage() {
               <p className="text-sm text-slate-500 font-medium">
                 New center? <Link href="/auth/register" className="text-primary font-black hover:underline">Register Institution</Link>
               </p>
-              <Link href="/auth/admin-login" className="text-[10px] font-black text-slate-400 uppercase tracking-widest hover:text-primary transition-colors flex items-center gap-1">
-                System Administrator Access <ArrowRight className="h-2 w-2" />
-              </Link>
             </CardFooter>
           </Card>
         )}

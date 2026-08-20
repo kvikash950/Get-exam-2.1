@@ -173,7 +173,7 @@ export default function Home() {
     ]);
   };
 
-  const siteName = config?.siteName || "My Exam";
+  const siteName = config?.siteName || "Get Exam";
   const headline = config?.heroHeadline || "Make your Coaching & Institute Digital & Paperless";
   const subheadline = config?.heroSubheadline || "Whether you are a Small Coaching Institute or a Large Institute, conduct exams from Class 1 to Higher Competitive levels.";
   const platformLogoUrl = config?.platformLogoUrl || null;

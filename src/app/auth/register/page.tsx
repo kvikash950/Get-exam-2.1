@@ -36,7 +36,7 @@ export default function RegisterPage() {
   const configRef = useMemoFirebase(() => db ? doc(db, 'platformConfig', 'settings') : null, [db]);
   const { data: config } = useDoc(configRef);
   const platformLogoUrl = config?.platformLogoUrl || null;
-  const siteName = config?.siteName || "My Exam";
+  const siteName = config?.siteName || "Get Exam";
 
   const generateCenterCode = () => {
     const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';

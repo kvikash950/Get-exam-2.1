@@ -1,6 +1,6 @@
 'use server';
 /**
- * @fileOverview AI Assistant for My Exam portal customers.
+ * @fileOverview AI Assistant for Get Exam portal customers.
  * 
  * This flow handles user queries about the platform's features, plans, and technical functions.
  */
@@ -53,7 +53,7 @@ async function withRetry<T>(fn: () => Promise<T>, retries = 3, delay = 2000): Pr
   }
 }
 
-const systemPrompt = `You are the Official AI Support Assistant for "My Exam" (Assessment Forge). 
+const systemPrompt = `You are the Official AI Support Assistant for "Get Exam" (Assessment Forge). 
 Your goal is to help coaching institutes and schools understand our features, plans, and technical functions.
 
 PLATFORM MISSION:
