@@ -406,12 +406,28 @@ export default function AttemptContent() {
 
   useEffect(() => {
     if (exam && now && isInitialized) {
-      const examEndTime = new Date(exam.endTime).getTime();
-      const examStartTime = new Date(exam.startTime).getTime();
-      const examDurationMinutes = exam.durationMinutes || 0;
+      const examDurationMinutes = Number(exam.durationMinutes || exam.timeLimitMinutes || 60);
       
-      // Calculate effective end time: min of global end time and (start time + duration)
-      const effectiveEndTime = Math.min(examEndTime, examStartTime + (examDurationMinutes * 60 * 1000));
+      let attemptStartTime = now.getTime();
+      if (attempt?.startedAt) {
+        if (typeof attempt.startedAt.toDate === 'function') {
+           attemptStartTime = attempt.startedAt.toDate().getTime();
+        } else if (attempt.startedAt.seconds) {
+           attemptStartTime = attempt.startedAt.seconds * 1000;
+        } else if (typeof attempt.startedAt === 'string' || typeof attempt.startedAt === 'number') {
+           attemptStartTime = new Date(attempt.startedAt).getTime();
+        }
+      }
+
+      const attemptEndTime = attemptStartTime + (examDurationMinutes * 60 * 1000);
+      let effectiveEndTime = attemptEndTime;
+      
+      if (exam.endTime) {
+        const examEndTime = new Date(exam.endTime).getTime();
+        if (!isNaN(examEndTime)) {
+          effectiveEndTime = Math.min(examEndTime, attemptEndTime);
+        }
+      }
       
       // If end time is reached, submit for everyone immediately
       const remainingSeconds = Math.max(0, Math.floor((effectiveEndTime - now.getTime()) / 1000));
@@ -419,10 +435,10 @@ export default function AttemptContent() {
       setTimeLeft(remainingSeconds);
       
       if (remainingSeconds <= 0 && !isSubmittingRef.current) {
-        handleAutoSubmit('GlobalEndTimeReached');
+        handleAutoSubmit('TimeExpired');
       }
     }
-  }, [exam, now, handleAutoSubmit, isInitialized]);
+  }, [exam, attempt, now, handleAutoSubmit, isInitialized]);
 
   useEffect(() => {
     if (questions?.length && shuffledQuestions.length === 0) setShuffledQuestions(shuffleArray(questions));
