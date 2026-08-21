@@ -383,7 +383,7 @@ function ResultContent() {
                 <Shield className="h-8 w-8" />
               </div>
               <div className="flex flex-col text-left">
-                <span className="font-headline font-bold text-2xl text-primary leading-none">{center?.name || 'My Exam'}</span>
+                <span className="font-headline font-bold text-2xl text-primary leading-none">{center?.name || 'Get Exam'}</span>
                 <span className="text-[8px] font-black text-slate-400 uppercase tracking-widest mt-1">Certified Digital Assessment</span>
               </div>
             </div>

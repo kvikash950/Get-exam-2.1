@@ -31,7 +31,7 @@ export default function MaintenancePage() {
           <div className="bg-primary p-2 rounded-2xl text-white shadow-2xl">
             <Shield className="h-8 w-8" />
           </div>
-          <span className="font-headline font-bold text-3xl text-white tracking-tight">My Exam</span>
+          <span className="font-headline font-bold text-3xl text-white tracking-tight">Get Exam</span>
         </div>
 
         <Card className="border-none shadow-2xl bg-slate-900/50 backdrop-blur-xl rounded-[3rem] p-12 overflow-hidden border border-white/5">

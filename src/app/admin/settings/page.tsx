@@ -511,6 +511,18 @@ export default function AdminSettingsPage() {
                        <div className="space-y-2"><Label className="text-xs font-black uppercase tracking-widest text-slate-500">Effective Date</Label><Input value={termsData.effectiveDate} onChange={(e) => setTermsData({...termsData, effectiveDate: e.target.value})} /></div>
                        <div className="space-y-2"><Label className="text-xs font-black uppercase tracking-widest text-slate-500">Last Revised</Label><Input value={termsData.lastRevised} onChange={(e) => setTermsData({...termsData, lastRevised: e.target.value})} /></div>
                     </div>
+                    <div className="space-y-2">
+                      <Label className="text-xs font-black uppercase tracking-widest text-slate-500">Terms of Service Content</Label>
+                      <Textarea className="min-h-[200px]" value={termsData.tosContent} onChange={(e) => setTermsData({...termsData, tosContent: e.target.value})} />
+                    </div>
+                    <div className="space-y-2">
+                      <Label className="text-xs font-black uppercase tracking-widest text-slate-500">Privacy Policy Content</Label>
+                      <Textarea className="min-h-[200px]" value={termsData.privacyContent} onChange={(e) => setTermsData({...termsData, privacyContent: e.target.value})} />
+                    </div>
+                    <div className="space-y-2">
+                      <Label className="text-xs font-black uppercase tracking-widest text-slate-500">Grievance Email</Label>
+                      <Input value={termsData.grievanceEmail} onChange={(e) => setTermsData({...termsData, grievanceEmail: e.target.value})} />
+                    </div>
                  </CardContent>
                </Card>
             </TabsContent>

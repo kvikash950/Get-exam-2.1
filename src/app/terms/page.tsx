@@ -38,7 +38,7 @@ export default function TermsPage() {
   // Fallback data if admin hasn't set anything yet
   const effectiveDate = termsConfig?.effectiveDate || "October 20, 2024";
   const lastRevised = termsConfig?.lastRevised || "July 30, 2026";
-  const tosContent = termsConfig?.tosContent || "By accessing, registering, or using the \"My Exam\" portal (hereinafter referred to as the \"Platform\"), you agree to be legally bound by these Terms and Conditions. These terms govern the operational relationship between Assessment Forge Global (the \"Company\", \"We\", \"Us\"), Institutional Users (Coaching Centers, Schools, Colleges, and Individual Educators), and their end-users (\"Students\").";
+  const tosContent = termsConfig?.tosContent || "By accessing, registering, or using the \"Get Exam\" portal (hereinafter referred to as the \"Platform\"), you agree to be legally bound by these Terms and Conditions. These terms govern the operational relationship between Assessment Forge Global (the \"Company\", \"We\", \"Us\"), Institutional Users (Coaching Centers, Schools, Colleges, and Individual Educators), and their end-users (\"Students\").";
   const privacyContent = termsConfig?.privacyContent || "We never sell, rent, trade, share, or monetize any candidate data, institutional rosters, contact lists, test scores, or proctoring logs to advertisers, data brokers, or marketing entities. All student and institutional data is treated as strictly confidential and is used exclusively to deliver examination services requested by the customer.";
   const grievanceEmail = termsConfig?.grievanceEmail || "legal@assessmentforge.com";
 
@@ -58,7 +58,7 @@ export default function TermsPage() {
           <div className="bg-primary p-1.5 rounded-lg text-white shadow-lg">
             <Shield className="h-5 w-5" />
           </div>
-          <span className="font-headline font-bold text-xl text-primary tracking-tight">My Exam</span>
+          <span className="font-headline font-bold text-xl text-primary tracking-tight">Get Exam</span>
         </Link>
         <Link href="/">
           <Button variant="ghost" className="font-bold text-sm h-10 gap-2">
@@ -143,7 +143,7 @@ export default function TermsPage() {
               <div className="space-y-4">
                 <h3 className="text-lg font-bold text-slate-900">5. Content Responsibility</h3>
                 <p className="text-xs text-slate-500 leading-relaxed">
-                  "My Exam" functions solely as a SaaS provider. We do not create or verify question papers. Institutional Users bear sole legal responsibility for copyright compliance of their uploaded materials.
+                  "Get Exam" functions solely as a SaaS provider. We do not create or verify question papers. Institutional Users bear sole legal responsibility for copyright compliance of their uploaded materials.
                 </p>
               </div>
               <div className="space-y-4">

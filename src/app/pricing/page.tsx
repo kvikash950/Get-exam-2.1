@@ -38,7 +38,7 @@ import {
   Globe,
   Wallet
 } from 'lucide-react';
-import { useUser, useFirestore, useDoc, useMemoFirebase, updateDocumentNonBlocking } from '@/firebase';
+import { useUser, useFirestore, useDoc, useMemoFirebase, setDocumentNonBlocking } from '@/firebase';
 import { doc, collection, getDocs, query, where, serverTimestamp } from 'firebase/firestore';
 import { useToast } from '@/hooks/use-toast';
 import { 
@@ -115,7 +115,7 @@ export default function PricingPage() {
     }
     setIsVerifying(true);
     if (profileRef) {
-      updateDocumentNonBlocking(profileRef, {
+      setDocumentNonBlocking(profileRef, {
         paymentUtr: utrNumber,
         appliedCouponCode: appliedCoupon?.code || null,
         paymentRequestedAt: serverTimestamp(),
@@ -123,7 +123,7 @@ export default function PricingPage() {
         requestedFinalAmount: Number(finalPrice),
         paymentStatus: 'Pending Verification',
         updatedAt: serverTimestamp()
-      });
+      }, { merge: true });
     }
     setTimeout(() => {
       setIsVerifying(false);
@@ -139,12 +139,12 @@ export default function PricingPage() {
      // Gateway simulation
      setTimeout(() => {
         if (profileRef) {
-           updateDocumentNonBlocking(profileRef, {
+           setDocumentNonBlocking(profileRef, {
               paymentStatus: 'Verified',
               paymentHistory: [{ type: 'GATEWAY_PURCHASE', credits: Number(currentStudents), amount: Number(finalPrice), verifiedAt: new Date().toISOString(), status: 'Verified' }],
               availableCredits: (profile?.availableCredits || 0) + Number(currentStudents),
               updatedAt: serverTimestamp()
-           });
+           }, { merge: true });
         }
         setIsVerifying(false);
         setIsPaymentOpen(false);
@@ -161,7 +161,7 @@ export default function PricingPage() {
       <header className="px-4 md:px-12 h-16 md:h-20 flex items-center border-b bg-white/80 backdrop-blur-md sticky top-0 z-50 shadow-sm">
         <Link className="flex items-center gap-2" href="/">
           <div className="bg-primary p-1.5 md:p-2 rounded-xl text-white shadow-lg"><Shield className="h-5 w-5" /></div>
-          <span className="font-headline font-bold text-xl md:text-2xl text-slate-900 tracking-tight">My Exam</span>
+          <span className="font-headline font-bold text-xl md:text-2xl text-slate-900 tracking-tight">Get Exam</span>
         </Link>
         <nav className="ml-auto flex gap-4">
           <Link href={user ? "/center/dashboard" : "/auth/login"}><Button variant="ghost" className="font-bold text-sm h-10 px-6">{user ? "Dashboard" : "Login"}</Button></Link>

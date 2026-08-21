@@ -197,6 +197,23 @@ export default function CenterDashboard() {
             </div>
           )}
 
+          {centerProfile?.paymentStatus === 'Pending Verification' && (
+            <div className="bg-orange-50 rounded-3xl p-6 border-2 border-orange-100 flex items-center justify-between shadow-sm">
+               <div className="flex gap-4 items-center">
+                 <div className="h-16 w-16 bg-orange-100 rounded-full flex items-center justify-center text-orange-600">
+                   <Clock className="h-8 w-8" />
+                 </div>
+                 <div>
+                   <h4 className="text-xl font-black text-orange-900 uppercase">Verification Pending</h4>
+                   <p className="text-sm font-medium text-orange-700">Transaction ID (UTR): <span className="font-black underline">{centerProfile.paymentUtr}</span></p>
+                   <p className="text-[10px] font-bold text-orange-600/60 uppercase mt-1">Requested for {centerProfile.requestedCredits} credits • Amount: ₹{centerProfile.requestedFinalAmount}</p>
+                   <p className="text-sm font-bold text-orange-800 mt-2">Your credits will be added to your account shortly.</p>
+                 </div>
+               </div>
+               <Badge className="bg-orange-600 text-white font-black px-6 py-2 rounded-xl text-xs">AWAITING ADMIN ACTION</Badge>
+            </div>
+          )}
+
           {credits < 50 && (
             <Alert className="rounded-3xl border-2 shadow-sm bg-orange-50 border-orange-200">
               <div className="flex items-center gap-4">

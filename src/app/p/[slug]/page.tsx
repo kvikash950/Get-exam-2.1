@@ -67,7 +67,7 @@ function PageContent() {
           <div className="bg-primary p-1.5 rounded-lg text-white shadow-lg">
             <Shield className="h-5 w-5" />
           </div>
-          <span className="font-headline font-bold text-xl text-primary tracking-tight">My Exam</span>
+          <span className="font-headline font-bold text-xl text-primary tracking-tight">Get Exam</span>
         </Link>
         <Link href="/">
           <Button variant="ghost" className="font-bold text-sm h-10 gap-2">
@@ -110,7 +110,7 @@ function PageContent() {
             <div className="flex items-center gap-3">
               <Shield className="h-8 w-8 text-primary/40" />
               <div className="flex flex-col">
-                <span className="font-headline font-bold text-sm tracking-tight">My Exam Verification</span>
+                <span className="font-headline font-bold text-sm tracking-tight">Get Exam Verification</span>
                 <span className="text-[8px] font-black uppercase tracking-widest">Platform Integrity Sealed</span>
               </div>
             </div>

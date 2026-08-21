@@ -137,7 +137,7 @@ export default function CenterProfilePage() {
       <aside className="w-64 bg-white border-r hidden md:flex flex-col sticky top-0 h-screen shadow-sm">
         <div className="p-6 border-b flex items-center gap-2">
           <Shield className="h-6 w-6 text-primary" />
-          <span className="font-headline font-bold text-xl text-primary">My Exam</span>
+          <span className="font-headline font-bold text-xl text-primary">Get Exam</span>
         </div>
         <nav className="flex-1 p-4 space-y-2">
           <Link href="/center/dashboard"><Button variant="ghost" className="w-full justify-start gap-3"><LayoutDashboard className="h-4 w-4" /> Console Home</Button></Link>
@@ -214,6 +214,7 @@ export default function CenterProfilePage() {
                           <h4 className="text-xl font-black text-orange-900 uppercase">Verification Pending</h4>
                           <p className="text-sm font-medium text-orange-700">Transaction ID (UTR): <span className="font-black underline">{profile.paymentUtr}</span></p>
                           <p className="text-[10px] font-bold text-orange-600/60 uppercase mt-1">Requested for {profile.requestedCredits} credits • Amount: ₹{profile.requestedFinalAmount}</p>
+                          <p className="text-sm font-bold text-orange-800 mt-2">Your credits will be added to your account shortly.</p>
                         </div>
                       </div>
                       <Badge className="bg-orange-600 text-white font-black px-6 py-2 rounded-xl text-xs">AWAITING ADMIN ACTION</Badge>

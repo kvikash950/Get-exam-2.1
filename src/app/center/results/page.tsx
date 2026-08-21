@@ -132,14 +132,14 @@ export default function ResultsPage() {
   return (
     <div className="flex min-h-screen bg-slate-50/50">
       <aside className="w-64 bg-white border-r hidden md:flex flex-col sticky top-0 h-screen shadow-sm">
-        <div className="p-6 border-b flex items-center gap-2"><Shield className="h-6 w-6 text-primary" /><span className="font-headline font-bold text-xl">My Exam</span></div>
+        <div className="p-6 border-b flex items-center gap-2"><Shield className="h-6 w-6 text-primary" /><span className="font-headline font-bold text-xl">Get Exam</span></div>
         <NavItems />
         <div className="p-4 border-t"><Button variant="ghost" className="w-full justify-start gap-3 text-red-600" onClick={handleLogout}><LogOut className="h-4 w-4" /> Logout</Button></div>
       </aside>
 
       <div className="flex-1 flex flex-col">
         <header className="h-16 bg-white border-b flex md:hidden items-center justify-between px-4 sticky top-0 z-40">
-          <div className="flex items-center gap-2"><Shield className="h-6 w-6 text-primary" /><span className="font-headline font-bold text-lg">My Exam</span></div>
+          <div className="flex items-center gap-2"><Shield className="h-6 w-6 text-primary" /><span className="font-headline font-bold text-lg">Get Exam</span></div>
           <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
             <SheetTrigger asChild><Button variant="ghost" size="icon"><Menu className="h-6 w-6" /></Button></SheetTrigger>
             <SheetContent side="left" className="p-0 w-72"><NavItems /></SheetContent>
